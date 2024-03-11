@@ -1,0 +1,5 @@
+.wrapper {
+  filter: url(#pixellate-filter);
+}
+
+@svg url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='pixellate-filter'><feFlood flood-color='black' result='black'/><feMorphology operator='dilate' radius='2' in='SourceGraphic' result='dilated'/><feColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0' in='dilated' result='pixellated'/><feComposite operator='in' in='pixellated' in2='black' result='output'/><feComposite operator='over' in='output' in2='SourceGraphic'/></filter></svg>#pixellate-filter");
