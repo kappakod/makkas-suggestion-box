@@ -13,6 +13,9 @@ const IndexPage = () => {
             <div className={styles.description}>
               <MainScreen />
             </div>
+            <footer style={{ marginTop: "2.4rem", display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
+              <p className={styles.code}>Game search API provided by <a href="https://www.giantbomb.com/api/">Giant Bomb</a></p>
+            </footer>
           </main>
         </GamesProvider>
       </AppProvider>

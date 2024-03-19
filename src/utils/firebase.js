@@ -3,16 +3,16 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, doc, getDocs, addDoc, setDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDgLvBQ7yJ3_LRyGMZQbb3Fimc2ZqLf3gg",
-  authDomain: "suggestion-box-3a08f.firebaseapp.com",
-  projectId: "suggestion-box-3a08f",
-  storageBucket: "suggestion-box-3a08f.appspot.com",
-  messagingSenderId: "614738498415",
-  appId: "1:614738498415:web:51c519108b3ad2c67dce9a"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MSG_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID
 };
 
 const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
-const gameCollectionRef = collection(firestore, 'suggested_games')
+const gameCollectionRef = collection(firestore, process.env.NEXT_PUBLIC_FIRESTORE)
 
 export { gameCollectionRef, doc, getDocs, setDoc, addDoc }; // Export Firestore instance

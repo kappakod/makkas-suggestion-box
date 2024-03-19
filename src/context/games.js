@@ -6,14 +6,14 @@ export const GamesContext = createContext();
 // Create the GamesProvider component
 export const GamesProvider = ({ children }) => {
   const [gameList, setGameList] = useState([]);
-  const [gameIDList, setGameIDList] = useState({});
+  const [gameExists, setGameExists] = useState(false);
 
   // Value object to be provided by the context
   const gamesContextValue = {
     gameList,
     setGameList,
-    gameIDList,
-    setGameIDList
+    gameExists,
+    setGameExists
   };
 
   return (

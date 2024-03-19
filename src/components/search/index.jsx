@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import SearchListItem from './searchListItem';
+import { useGamesContext } from '@/context/games';
 import styles from './search.module.css';
 
 const Search = () => {
+  const { gameExists, setGameExists } = useGamesContext();
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -50,6 +52,7 @@ const Search = () => {
     setIsSearching(true);
     setHasNoResults(false);
     setInputError(false);
+    setGameExists(false);
 
     if (searchTerm === '') {
       setInputError(true);
@@ -64,7 +67,6 @@ const Search = () => {
       });
 
       const data = await response.data;
-      console.log(response.data)
       if (data.length === 0) {
         setHasNoResults(true);
       }
@@ -105,6 +107,7 @@ const Search = () => {
         </ul>
       )}
       {hasNoResults && !isSearching && <p className={styles.noResults}>No results found.</p>}
+      {gameExists && <p className={styles.noResults}>That game has already been added!</p>}
     </div>
   );
 };
