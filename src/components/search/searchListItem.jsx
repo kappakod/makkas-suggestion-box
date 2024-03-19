@@ -1,5 +1,6 @@
 import React from "react";
 import { getYear } from 'date-fns';
+import Image from 'next/image';
 
 import { gameCollectionRef, setDoc, doc } from "@/utils/firebase";
 
@@ -28,7 +29,7 @@ const SearchListItem = ({ game, closeHandler }) => {
   return (
     <li className={styles.searchListItem} key={game.id} onClick={handleClick}>
       <div className={styles.gameImg}>
-        <img src={game.image.medium_url} alt={`${game.name} cover image`} />
+        <Image src={game.image.medium_url} alt={`${game.name} cover image`} />
       </div>
       <div className={styles.gameInfo}>
         <p>{game.name}</p>

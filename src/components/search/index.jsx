@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import axios from 'axios';
 
 import SearchListItem from './searchListItem';
@@ -19,14 +20,38 @@ const Search = () => {
     setHasNoResults(false);
   }
 
-  const handleOutsideClick = (e) => {
-    const insideSearchContainer = e.target.closest(`.${styles.container}`);
-    if (!insideSearchContainer) {
-      closeSearch();
-    }
-  };
-
   useEffect(() => {
+    const handleSearch = async () => {
+      setIsSearching(true);
+      setHasNoResults(false);
+      setInputError(false);
+      setGameExists(false);
+  
+      if (searchTerm === '') {
+        setInputError(true);
+        setIsSearching(false);
+        setHasNoResults(false);
+        return;
+      }
+  
+      try {
+        const response = await axios.get('/api/searchGames', {
+          params: { search: searchTerm }
+        });
+  
+        const data = await response.data;
+        if (data.length === 0) {
+          setHasNoResults(true);
+        }
+        setSearchResults(data);
+      } catch (error) {
+        console.error('Error searching for games:', error);
+        setHasNoResults(true);
+      }
+  
+      setIsSearching(false);
+    };
+
     const debounceSearch = setTimeout(() => {
       if (searchTerm === '') {
         setSearchResults([]);
@@ -38,46 +63,21 @@ const Search = () => {
     return () => {
       clearTimeout(debounceSearch);
     };
-  }, [searchTerm]);
+  }, [setGameExists, searchTerm]);
 
   useEffect(() => {
+    const handleOutsideClick = (e) => {
+      const insideSearchContainer = e.target.closest(`.${styles.container}`);
+      if (!insideSearchContainer) {
+        closeSearch();
+      }
+    };
     document.addEventListener('click', handleOutsideClick);
 
     return () => {
       document.removeEventListener('click', handleOutsideClick);
     };
   }, [searchResults]);
-
-  const handleSearch = async () => {
-    setIsSearching(true);
-    setHasNoResults(false);
-    setInputError(false);
-    setGameExists(false);
-
-    if (searchTerm === '') {
-      setInputError(true);
-      setIsSearching(false);
-      setHasNoResults(false);
-      return;
-    }
-
-    try {
-      const response = await axios.get('/api/searchGames', {
-        params: { search: searchTerm }
-      });
-
-      const data = await response.data;
-      if (data.length === 0) {
-        setHasNoResults(true);
-      }
-      setSearchResults(data);
-    } catch (error) {
-      console.error('Error searching for games:', error);
-      setHasNoResults(true);
-    }
-
-    setIsSearching(false);
-  };
 
   return (
     <div className={styles.container}>
@@ -91,7 +91,7 @@ const Search = () => {
         />
         {isSearching && (
           <div className={styles.loadingContainer}>
-            <img src="/loading.gif" alt="loading" />
+            <Image src="/loading.gif" alt="loading" />
           </div>
         )}
         {inputError && <span className={styles.error}>Please enter a search term.</span>}
