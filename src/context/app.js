@@ -7,6 +7,7 @@ export const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [gameList, setGameList] = useState([]);
+  const [platforms, setPlatforms] = useState([]);
 
   // Value object to be provided by the context
   const appContextValue = {
@@ -14,6 +15,8 @@ export const AppProvider = ({ children }) => {
     setIsLoading,
     gameList,
     setGameList,
+    platforms,
+    setPlatforms
   };
 
   return (
