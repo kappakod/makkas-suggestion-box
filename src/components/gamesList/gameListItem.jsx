@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import Image from 'next/image';
 import styles from './gamesList.module.css';
 
 const GamesList = ({ game }) => {
@@ -28,7 +29,7 @@ const GamesList = ({ game }) => {
     >
       {game.now_playing && <div className={styles.nowPlayingBadge}>Now Playing</div>} 
       <h3>{game.name}</h3>
-      <img
+      <Image
         src={game.image.small_url}
         alt={game.name}
         className={styles.gameImg}
