@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, doc, getDocs, addDoc, setDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDgLvBQ7yJ3_LRyGMZQbb3Fimc2ZqLf3gg",
@@ -12,8 +12,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-console.log(app);
 const firestore = getFirestore(app);
-const gameCollectionRef = collection(firestore, 'suggestions')
+const gameCollectionRef = collection(firestore, 'suggested_games')
 
-export { gameCollectionRef, getDocs }; // Export Firestore instance
+export { gameCollectionRef, doc, getDocs, setDoc, addDoc }; // Export Firestore instance

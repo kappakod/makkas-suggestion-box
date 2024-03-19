@@ -1,21 +1,21 @@
 'use client';
 import React from "react";
-import Home from "@/pages/home";
-import { AuthProvider } from "@/context/auth";
+import MainScreen from "@/components/mainScreen";
 import { AppProvider } from "@/context/app";
+import { GamesProvider } from "@/context/games";
 import styles from "./page.module.css";
 
 const IndexPage = () => {
   return (
-    <AuthProvider>
       <AppProvider>
-        <main className={styles.main}>
-          <div className={styles.description}>
-            <Home />
-          </div>
-        </main>
+        <GamesProvider>
+          <main className={styles.main}>
+            <div className={styles.description}>
+              <MainScreen />
+            </div>
+          </main>
+        </GamesProvider>
       </AppProvider>
-    </AuthProvider>
   );
 };
 
