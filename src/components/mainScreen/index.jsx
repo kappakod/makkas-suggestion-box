@@ -39,7 +39,7 @@ const MainScreen = () => {
       <h1>Makka&apos;s Suggestion Box</h1>
       {!gameList.length && isFetchingList ? (
         <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
-          <p>Loading...</p><Image style={{ width: "14px" }} src="/loading.gif" alt="loading" />
+          <p>Loading...</p><Image width={14} src="/loading.gif" alt="loading" />
         </div>
       ) : (
         <>
