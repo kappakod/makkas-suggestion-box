@@ -72,6 +72,10 @@
   animation: colorAnimationNowPlaying 4s infinite;
 }
 
+.gameItem:hover {
+  box-shadow: 0 0 10px 0 rgba(255, 255, 255, 1);
+}
+
 .nowPlayingBadge {
   position: absolute;
   top: -16px;

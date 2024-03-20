@@ -91,7 +91,7 @@ const Search = () => {
         />
         {isSearching && (
           <div className={styles.loadingContainer}>
-            <Image src="/loading.gif" alt="loading" />
+            <Image src="/loading.gif" alt="loading" width={24} height={24} />
           </div>
         )}
         {inputError && <span className={styles.error}>Please enter a search term.</span>}

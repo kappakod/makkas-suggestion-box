@@ -33,6 +33,8 @@ const GamesList = ({ game }) => {
         src={game.image.small_url}
         alt={game.name}
         className={styles.gameImg}
+        width={190}
+        height={107}
       />
     </li>
   );

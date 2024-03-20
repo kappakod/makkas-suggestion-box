@@ -13,7 +13,7 @@ const SearchListItem = ({ game, closeHandler }) => {
   const handleClick = async e => {
     try {
       // Add data to the "users" collection
-      await setDoc(doc(gameCollectionRef, `${game.id}`), { now_playing: false, ...game});
+      await setDoc(doc(gameCollectionRef, `${game.id}`), { now_playing: false, ...game });
       closeHandler();
 
       if (gameList.some(existingGame => existingGame.id === game.id)) {
@@ -29,7 +29,12 @@ const SearchListItem = ({ game, closeHandler }) => {
   return (
     <li className={styles.searchListItem} key={game.id} onClick={handleClick}>
       <div className={styles.gameImg}>
-        <Image src={game.image.medium_url} alt={`${game.name} cover image`} />
+        <Image
+          src={game.image.medium_url}
+          alt={`${game.name} cover image`}
+          width={190}
+          height={107}
+        />
       </div>
       <div className={styles.gameInfo}>
         <p>{game.name}</p>
