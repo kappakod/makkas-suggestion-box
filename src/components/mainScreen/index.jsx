@@ -19,7 +19,7 @@ const MainScreen = () => {
         querySnapshot.forEach(doc => {
           gamesData.push(doc.data());
         });
-        setGameList(gamesData.sort((a, b) => (b.now_playing ? 1 : -1)));
+        setGameList([...gamesData.filter(game => game.now_playing), ...gamesData.filter(game => !game.now_playing).sort((a, b) => (b.vote_count - a.vote_count))]);
         setIsFetchingList(false);
       } catch (error) {
         console.error('Error getting documents: ', error);
@@ -36,19 +36,19 @@ const MainScreen = () => {
 
   return (
     <>
-      <h1>Makka Pans&apos;s Suggestion Box</h1>
+      <h1>Makka Pan&apos;s Suggestion Box</h1>
       {!gameList.length && isFetchingList ? (
         <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
           <p>Loading...</p><Image width={14} height={14} src="/loading.gif" alt="loading" />
         </div>
       ) : (
         <>
-          <p>HEY <span><Image src="/bloblu.gif" width={36} height={36}/></span></p>
+          <p>HEY <span><Image src="/bloblu.gif" width={36} height={36} alt=""/></span></p>
           <p>Suggest a game for me to stream next!</p>
           <p>You can filter the list below to see what&apos;s currently being played, or what others have suggested.</p>
           <Search />
           {gameList && (
-            <GamesList games={gameList} />
+            <GamesList label="Suggested games" games={gameList} />
           )}
         </>
       )}

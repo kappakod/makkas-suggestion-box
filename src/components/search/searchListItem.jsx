@@ -13,7 +13,7 @@ const SearchListItem = ({ game, closeHandler }) => {
   const handleClick = async e => {
     try {
       // Add data to the "users" collection
-      await setDoc(doc(gameCollectionRef, `${game.id}`), { now_playing: false, ...game });
+      await setDoc(doc(gameCollectionRef, `${game.id}`), { now_playing: false, vote_count: 1, ...game });
       closeHandler();
 
       if (gameList.some(existingGame => existingGame.id === game.id)) {

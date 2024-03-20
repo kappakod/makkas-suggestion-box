@@ -14,9 +14,56 @@
 .gamesList {
   display: grid;
   margin-top: 2.4rem;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, 200px);
   gap: 1rem;
   grid-column-gap: 1rem; /* Added grid-column-gap property */
+}
+
+.gamesList li {
+  list-style: none;
+  position: relative;
+  max-width: 230px; /* Updated max width */
+}
+
+@keyframes buttonAnimation {
+  0% {
+    background-color: plum;
+  }
+  25% {
+    background-color: blueviolet;
+  }
+  50% {
+    background-color: rebeccapurple;
+  }
+  75% {
+    background-color: mediumvioletred;
+  }
+  100% {
+    background-color: plum;
+  }
+}
+
+.gamesList li button {
+  background-image: url('../../../public/arrow-up.svg');
+  background-color: rebeccapurple;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  position: absolute;
+  animation: buttonAnimation 4s infinite;
+  font-size: 18px;
+  bottom: -8px;
+  right: -8px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50px;
+  border: 0;
+}
+
+.gamesList li button:hover {
+  animation: none;
+  background-color: mediumseagreen;
 }
 
 @keyframes colorAnimation {
@@ -55,12 +102,32 @@
   }
 }
 
+@keyframes nowPlayingBadgeAnimation {
+  0% {
+    background-color: darkgreen;
+  }
+  25% {
+    background-color: mediumspringgreen;
+  }
+  50% {
+    background-color: mediumseagreen;
+  }
+  75% {
+    background-color: mediumaquamarine;
+  }
+  100% {
+    background-color: darkgreen;
+  }
+}
+
 .gameItem {
   list-style: none;
   border: 1px solid;
   border-radius: 5px;
   padding: 1rem;
-  max-width: 230px; /* Updated max width */
+  min-height: 385px;
+  display: flex;
+  flex-direction: column;
 }
 
 .gameItem:not(.nowPlaying) {
@@ -81,17 +148,25 @@
   top: -16px;
   right: 10px;
   padding: 0.5rem;
-  background-color: mediumseagreen;
+  animation: nowPlayingBadgeAnimation 4s infinite;
   font-size: 0.8rem;
   border-radius: 5px;
 }
 
 .gameItem > h3 {
   font-size: 1rem;
-  margin-bottom: 1rem;
+  margin: 0.8rem 0 0.4rem;
 }
 
 .gameImg {
   width: 100%;
   height: auto;
+}
+
+.votes {
+  margin-top: auto;
+  margin-bottom: 0;
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
 }

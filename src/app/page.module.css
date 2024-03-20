@@ -13,7 +13,7 @@
   width: 100%;
   z-index: 2;
   font-family: var(--font-mono);
-  min-height: 80vh;
+  min-height: 75vh;
 }
 
 .code {
@@ -24,7 +24,7 @@
 .footer {
   max-width: var(--max-width);
   margin: 0 auto;
-  margin-top: "2.4rem";
+  margin-top: 4.8rem;
   display: "flex";
   justify-content: "flex-start";
   align-items: "center" 

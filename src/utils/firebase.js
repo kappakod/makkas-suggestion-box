@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, doc, getDocs, addDoc, setDoc } from 'firebase/firestore';
+import { getFirestore, collection, doc, getDocs, addDoc, setDoc, updateDoc, increment } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -15,4 +15,4 @@ const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
 const gameCollectionRef = collection(firestore, process.env.NEXT_PUBLIC_FIRESTORE)
 
-export { gameCollectionRef, doc, getDocs, setDoc, addDoc }; // Export Firestore instance
+export { gameCollectionRef, doc, getDocs, setDoc, addDoc, updateDoc, increment }; // Export Firestore instance
