@@ -9,6 +9,14 @@ const GamesList = ({ game, showVotes }) => {
   const [gameVotes, setGameVotes] = useState(game.vote_count);
   const liRef = useRef(null);
 
+  const handleLiHover = (event) => {
+    console.log(event.target);
+    const el = event.target;
+    if (event.type === 'mouseenter' && el.style.boxShadow) {
+      el.style = '';
+    }
+  }
+
   const handleButtonClick = async () => {
     try {
       await updateDoc(doc(gameCollectionRef, `${game.id}`), { vote_count: increment(1) });
@@ -30,8 +38,8 @@ const GamesList = ({ game, showVotes }) => {
   };
 
   return (
-    <li>
-      <div className={`${styles.gameItem} ${game.now_playing ? styles.nowPlaying : ''}`}
+    <li id={`Game${game.id}`} onMouseEnter={handleLiHover}>
+      <div id={`Game${game.id}--inner`} className={`${styles.gameItem} ${game.now_playing ? styles.nowPlaying : ''}`}
         onMouseMove={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{
@@ -54,7 +62,7 @@ const GamesList = ({ game, showVotes }) => {
         )}
       </div>
       {showVotes && (
-        <button className={styles.boostBtn} onClick={handleButtonClick}></button>
+        <button className="focus" onClick={handleButtonClick} aria-label='upvote game'/>
       )}
     </li>
   );

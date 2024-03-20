@@ -16,13 +16,13 @@ const GamesList = ({ label, games }) => {
       {label && (
         <h2 className={styles.header}>{label}</h2>
       )}
-        <input 
+        {/* <input 
           className={styles.filterInput} 
           type="text"
           value={filter}
           onChange={handleFilterChange}
           placeholder="Filter by name"
-        />
+        /> */}
       <ul className={styles.gamesList}>
         {searchFilteredGames.map(game => (
           <GameListItem key={`${game.name}`} game={game} showVotes={!game.now_playing}/>

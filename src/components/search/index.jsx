@@ -107,7 +107,7 @@ const Search = () => {
         </ul>
       )}
       {hasNoResults && !isSearching && <p className={styles.noResults}>No results found.</p>}
-      {gameExists && <p className={styles.noResults}>That game has already been added!</p>}
+      {gameExists && <p className={styles.noResults}>That game has already been added to the list!</p>}
     </div>
   );
 };

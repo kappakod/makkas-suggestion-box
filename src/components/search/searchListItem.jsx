@@ -13,14 +13,17 @@ const SearchListItem = ({ game, closeHandler }) => {
   const handleClick = async e => {
     try {
       // Add data to the "users" collection
-      await setDoc(doc(gameCollectionRef, `${game.id}`), { now_playing: false, vote_count: 1, ...game });
-      closeHandler();
-
       if (gameList.some(existingGame => existingGame.id === game.id)) {
         setGameExists(true);
+        const listItem = document.getElementById(`Game${game.id}--inner`);
+        listItem.scrollIntoView({ behavior: 'smooth' });
+        listItem.style.boxShadow = 'rgb(230 174 54) 0px 0px 10px 5px';
       } else {
-        setGameList(prevState => [game, ...prevState]);
+        const payload = { now_playing: false, vote_count: 1, ...game };
+        await setDoc(doc(gameCollectionRef, `${game.id}`), payload);
+        setGameList(prevState => [payload, ...prevState]);
       };
+      closeHandler();
     } catch (error) {
       console.error('Error adding document: ', error);
     }

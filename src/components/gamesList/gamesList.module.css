@@ -19,10 +19,21 @@
   grid-column-gap: 1rem; /* Added grid-column-gap property */
 }
 
+@media screen and (max-width: 760px) {
+  .gamesList {
+    grid-template-columns: repeat(auto-fit, 30%); /* Updated grid-template-columns */
+  }
+}
+
+@media screen and (max-width: 603px) {
+  .gamesList {
+    grid-template-columns: repeat(auto-fit, 47%); /* Updated grid-template-columns */
+  }
+}
+
 .gamesList li {
   list-style: none;
   position: relative;
-  max-width: 230px; /* Updated max width */
 }
 
 @keyframes buttonAnimation {
@@ -45,13 +56,12 @@
 
 .gamesList li button {
   background-image: url('../../../public/arrow-up.svg');
-  background-color: rebeccapurple;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
   position: absolute;
-  animation: buttonAnimation 4s infinite;
+  background-color: grey;
   font-size: 18px;
   bottom: -8px;
   right: -8px;
@@ -62,6 +72,11 @@
 }
 
 .gamesList li button:hover {
+  animation: none;
+  background-color: rebeccapurple;
+}
+
+.gamesList li button:active {
   animation: none;
   background-color: mediumseagreen;
 }
@@ -77,7 +92,7 @@
     border-color: rebeccapurple;
   }
   75% {
-    border-color: mediumvioletred;
+    border-color: rgb(199, 21, 133);
   }
   100% {
     border-color: plum;
@@ -95,7 +110,7 @@
     border-color: mediumseagreen;
   }
   75% {
-    border-color: mediumaquamarine;
+    border-color: rgb(102, 205, 170);
   }
   100% {
     border-color: darkgreen;
@@ -128,6 +143,9 @@
   min-height: 385px;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  transition: box-shadow 0.2s ease;
+  box-shadow: rgb(230 174 54) 0px 0px 0px 0px;
 }
 
 .gameItem:not(.nowPlaying) {
@@ -139,8 +157,12 @@
   animation: colorAnimationNowPlaying 4s infinite;
 }
 
+.gameItem.nowPlaying:hover {
+  box-shadow: 0 0 10px 5px rgba(102, 205, 170, 1);
+}
+
 .gameItem:hover {
-  box-shadow: 0 0 10px 0 rgba(255, 255, 255, 1);
+  box-shadow: 0 0 10px 5px rgba(199, 21, 133, 1);
 }
 
 .nowPlayingBadge {
