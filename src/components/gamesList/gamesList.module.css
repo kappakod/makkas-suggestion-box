@@ -30,3 +30,9 @@
     grid-template-columns: repeat(auto-fit, 47%); /* Updated grid-template-columns */
   }
 }
+
+@media screen and (max-width: 490px) {
+  .gamesList {
+    grid-template-columns: repeat(auto-fit, 100%); /* Updated grid-template-columns */
+  }
+}
