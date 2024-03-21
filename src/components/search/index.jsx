@@ -94,7 +94,7 @@ const Search = () => {
             <Image src="/loading.gif" alt="loading" width={24} height={24} />
           </div>
         )}
-        {inputError && <span className={styles.error}>Please enter a search term.</span>}
+        {inputError && <span className={styles.error}>Please enter a valid search term.</span>}
       </div>
       {searchResults.length > 0 && (
         <ul className={styles.searchResults}>

@@ -45,7 +45,7 @@ const MainScreen = () => {
         <>
           <p>HEY <span><Image src="/bloblu.gif" width={36} height={36} alt=""/></span></p>
           <p>Suggest a game for me to stream next!</p>
-          <p>You can filter the list below to see what&apos;s currently being played, or what others have suggested.</p>
+          <p>You can vote on games in the list to push them to the top of the list (there are no rules for voting so if you&apos;re really passionate you can spam votes)</p>
           <Search />
           {gameList && (
             <GamesList label="Suggested games" games={gameList} />

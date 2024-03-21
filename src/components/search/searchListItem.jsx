@@ -21,6 +21,7 @@ const SearchListItem = ({ game, closeHandler }) => {
       } else {
         const payload = { now_playing: false, vote_count: 1, ...game };
         await setDoc(doc(gameCollectionRef, `${game.id}`), payload);
+        payload.just_added = true;
         setGameList(prevState => [payload, ...prevState]);
       };
       closeHandler();

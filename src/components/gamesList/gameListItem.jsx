@@ -1,16 +1,25 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { gameCollectionRef, updateDoc, doc, increment } from "@/utils/firebase";
 
-import styles from './gamesList.module.css';
+import styles from './gameListItem.module.css';
 
 const GamesList = ({ game, showVotes }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [gameVotes, setGameVotes] = useState(game.vote_count);
+  const [animate, setAnimate] = useState(false);
   const liRef = useRef(null);
 
+  useEffect(() => {
+    if (game.just_added) {
+      setAnimate(true);
+      setTimeout(() => {
+        setAnimate(false);
+      }, 750);
+    }
+  }, [game]);
+
   const handleLiHover = (event) => {
-    console.log(event.target);
     const el = event.target;
     if (event.type === 'mouseenter' && el.style.boxShadow) {
       el.style = '';
@@ -21,6 +30,10 @@ const GamesList = ({ game, showVotes }) => {
     try {
       await updateDoc(doc(gameCollectionRef, `${game.id}`), { vote_count: increment(1) });
       setGameVotes(gameVotes + 1);
+      setAnimate(true);
+      setTimeout(() => {
+        setAnimate(false);
+      }, 500);
     } catch (error) {
       console.error('Error adding vote: ', error);
     }
@@ -38,8 +51,8 @@ const GamesList = ({ game, showVotes }) => {
   };
 
   return (
-    <li id={`Game${game.id}`} onMouseEnter={handleLiHover}>
-      <div id={`Game${game.id}--inner`} className={`${styles.gameItem} ${game.now_playing ? styles.nowPlaying : ''}`}
+    <li id={`Game${game.id}`} onMouseEnter={handleLiHover} className={styles.gameListItem}>
+      <div id={`Game${game.id}--inner`} className={`${styles.gameItem} ${game.just_added ? styles.justAdded : ''} ${game.now_playing ? styles.nowPlaying : ''}`}
         onMouseMove={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{
@@ -47,7 +60,8 @@ const GamesList = ({ game, showVotes }) => {
         }}
         ref={liRef}
       >
-        {game.now_playing && <div className={styles.nowPlayingBadge}>Now Playing</div>}
+        {game.now_playing && <div className={`${styles.badge} ${styles.nowPlayingBadge}`}>Now Playing</div>}
+        {game.just_added && <div className={`${styles.badge} ${styles.justAddedBadge}`}>Just Added</div>}
         <Image
           src={game.image.small_url}
           alt={game.name}
@@ -62,7 +76,10 @@ const GamesList = ({ game, showVotes }) => {
         )}
       </div>
       {showVotes && (
-        <button className="focus" onClick={handleButtonClick} aria-label='upvote game'/>
+        <>
+          <span className={`${animate ? styles.floatingVote : ''} ${styles.voteAlert}`}>+1</span>
+          <button onClick={handleButtonClick} aria-label='upvote game'/>
+        </>
       )}
     </li>
   );
