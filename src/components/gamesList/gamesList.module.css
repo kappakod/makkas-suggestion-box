@@ -5,6 +5,10 @@
   margin: 2.4rem 0 1.2rem;
 }
 
+.header:nth-of-type(2) {
+  margin: 4.2rem 0 1.2rem;
+}
+
 .filterInput {
   padding: 0.4rem;
   border: none;

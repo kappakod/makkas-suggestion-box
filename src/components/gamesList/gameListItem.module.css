@@ -180,7 +180,8 @@
 }
 
 .gameItem:not(.nowPlaying),
-.gameItem:not(.justAdded) {
+.gameItem:not(.justAdded),
+.gameItem:not(.completed) {
   animation: colorAnimation 6s infinite;
 }
 
@@ -194,12 +195,21 @@
   animation: colorAnimationJustAdded 4s infinite;
 }
 
+.gameItem.completed {
+  border: 4px solid rgb(78, 76, 90);
+  animation: none;
+}
+
 .gameItem.nowPlaying:hover {
   box-shadow: 0 0 10px 5px rgba(102, 205, 170, 1);
 }
 
 .gameItem.justAdded:hover {
   box-shadow: 0 0 10px 5px rgb(255, 102, 52);
+}
+
+.gameItem.completed:hover {
+  box-shadow: 0 0 10px 5px rgb(177, 173, 206);
 }
 
 .gameItem:hover {

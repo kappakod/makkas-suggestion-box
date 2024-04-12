@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { gameCollectionRef, updateDoc, doc, increment } from "@/utils/firebase";
 
@@ -50,9 +50,11 @@ const GamesList = ({ game, showVotes }) => {
     setMousePosition({ x: 0, y: 0 });
   };
 
+  const gameItemClass = useMemo(() => `${styles.gameItem} ${game.just_added ? styles.justAdded : ''} ${game.now_playing ? styles.nowPlaying : ''} ${game.completed ? styles.completed : ''}`, [game])
+
   return (
     <li id={`Game${game.id}`} onMouseEnter={handleLiHover} className={styles.gameListItem}>
-      <div id={`Game${game.id}--inner`} className={`${styles.gameItem} ${game.just_added ? styles.justAdded : ''} ${game.now_playing ? styles.nowPlaying : ''}`}
+      <div id={`Game${game.id}--inner`} className={gameItemClass}
         onMouseMove={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{

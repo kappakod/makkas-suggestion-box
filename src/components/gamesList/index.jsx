@@ -9,7 +9,8 @@ const GamesList = ({ label, games }) => {
     setFilter(event.target.value);
   };
 
-  const searchFilteredGames = games.filter(game => game.name.toLowerCase().includes(filter.toLowerCase()));
+  const incompleteGames = games.filter(game => !game.completed);
+  const completedGames = games.filter(game => game.completed);
 
   return (
     <>
@@ -24,10 +25,20 @@ const GamesList = ({ label, games }) => {
           placeholder="Filter by name"
         /> */}
       <ul className={styles.gamesList}>
-        {searchFilteredGames.map(game => (
+        {incompleteGames.map(game => (
           <GameListItem key={`${game.name}`} game={game} showVotes={!game.now_playing}/>
         ))}
       </ul>
+      {completedGames.length > 0 && (
+        <>
+        <h2 className={styles.header}>Games completed on stream</h2>
+        <ul className={styles.gamesList}>
+          {completedGames.map(game => (
+            <GameListItem key={`${game.name}`} game={game} showVotes={false}/>
+          ))}
+        </ul>
+        </>
+      )}
     </>
   );
 };
